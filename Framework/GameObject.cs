@@ -26,6 +26,14 @@ namespace Framework
             c.device = device;
         }
 
+        public void Update()
+        {
+            foreach (var c in components)
+            {
+                c.Update();
+            }
+        }
+
         public void Render()
         {
             foreach (var c in components)

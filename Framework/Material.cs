@@ -29,7 +29,7 @@ namespace Framework
             pixelShaderByteCode = ShaderBytecode.CompileFromFile(@".\MiniTri.fx", "PSMain", "ps_5_0");
             pixelShader = new PixelShader(device, pixelShaderByteCode);
 
-            var layout = new InputLayout(
+            layout = new InputLayout(
                 device,
                 ShaderSignature.GetInputSignature(vertexShaderByteCode),
                 new[]

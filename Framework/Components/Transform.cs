@@ -14,5 +14,7 @@ namespace Framework
         public Quaternion Rotaion;
 
         public Transform(Device device) : base(device) { }
+
+        public Matrix ModelMatrix;
     }
 }

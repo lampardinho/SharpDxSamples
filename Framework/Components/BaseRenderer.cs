@@ -17,6 +17,8 @@ namespace Framework
 
         private BufferDescription bufDescription;
 
+        VertexBufferBinding binding;
+
         public BaseRenderer(Device device) : base(device)
         {
             material = new Material(device);
@@ -27,24 +29,22 @@ namespace Framework
                 BindFlags = BindFlags.VertexBuffer,
                 CpuAccessFlags = CpuAccessFlags.None,
                 OptionFlags = ResourceOptionFlags.None,
-                Usage = ResourceUsage.Default
+                Usage = ResourceUsage.Default,
             };
 
             VertexBuffer = Buffer.Create(device, mesh.vertices, bufDescription);
 
-            var context = device.ImmediateContext;
-            context.InputAssembler.InputLayout = material.layout;
-            context.InputAssembler.PrimitiveTopology = PrimitiveTopology.TriangleList;
-            context.InputAssembler.SetVertexBuffers(0, new VertexBufferBinding(VertexBuffer, 32, 0));
 
-            context.VertexShader.Set(material.vertexShader);
-            context.PixelShader.Set(material.pixelShader);
+            var context = device.ImmediateContext;
 
             context.Rasterizer.State = new RasterizerState(device, new RasterizerStateDescription
             {
                 CullMode = CullMode.None,
                 FillMode = FillMode.Solid
             });
+
+
+            binding = new VertexBufferBinding(VertexBuffer, 32, 0);
         }
 
         public override void Render()
@@ -52,6 +52,14 @@ namespace Framework
             base.Render();
 
             var context = device.ImmediateContext;
+
+           
+            context.InputAssembler.InputLayout = material.layout;
+            context.InputAssembler.PrimitiveTopology = PrimitiveTopology.TriangleList;
+            context.InputAssembler.SetVertexBuffers(0, binding);
+
+            context.VertexShader.Set(material.vertexShader);
+            context.PixelShader.Set(material.pixelShader);
             
             context.Draw(3, 0);
         }

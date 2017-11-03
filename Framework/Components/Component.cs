@@ -9,11 +9,13 @@ namespace Framework
 {
     public class Component
     {
-        public Device device;
-
-        public Component(Device device)
+        public Component()
         {
-            this.device = device;
+        }
+
+        public virtual void Update()
+        {
+
         }
 
         public virtual void Render()

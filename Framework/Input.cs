@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Framework
 {
-    public class Time
+    public class Input
     {
-        public static float DeltaTime;
-        public static float TimeSinceStartup;
+        public static Action<Keys> OnKeyDown;
+        public static Action<Keys> OnKeyUp;
     }
 }

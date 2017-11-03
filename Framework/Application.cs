@@ -7,6 +7,7 @@ using SharpDX.DXGI;
 using SharpDX.Windows;
 using Buffer = SharpDX.Direct3D11.Buffer;
 using Device = SharpDX.Direct3D11.Device;
+using System.Windows.Forms;
 
 namespace Framework
 {
@@ -45,7 +46,7 @@ namespace Framework
 
             Device.CreateWithSwapChain(
                 DriverType.Hardware,
-                DeviceCreationFlags.None,
+                DeviceCreationFlags.Debug,
                 swapDesc, out device, out swapChain);
 
             backBuffer = swapChain.GetBackBuffer<Texture2D>(0);
@@ -58,7 +59,22 @@ namespace Framework
 
             context.OutputMerger.SetTargets(renderView);
 
-            
+            // Create Constant Buffer
+            //var contantBuffer = new Buffer(device, Utilities.SizeOf<Matrix>(), 
+                //ResourceUsage.Default, BindFlags.ConstantBuffer, 
+                //CpuAccessFlags.None, ResourceOptionFlags.None, 0);
+
+
+
+            Form.KeyUp += (sender, args) =>
+            {
+                Input.OnKeyUp(args.KeyCode);
+            };
+
+            Form.KeyDown += (sender, args) =>
+            {
+                Input.OnKeyUp(args.KeyCode);
+            };
         }
 
         public void Run()
@@ -76,6 +92,24 @@ namespace Framework
         
         public void Render()
         {
+            //var viewProj = Matrix.Multiply(view, proj);
+
+            // Clear views
+            //context.ClearRenderTargetView(renderView, Color.Black);
+
+            // Update WorldViewProj Matrix
+            //var worldViewProj = Matrix.RotationX(time) * Matrix.RotationY(time * 2) * Matrix.RotationZ(time * .7f) * viewProj;
+            //worldViewProj.Transpose();
+            //context.UpdateSubresource(ref worldViewProj, contantBuffer);
+
+
+            //===============================
+
+            //context.ClearState();
+
+            context.Rasterizer.SetViewport(new Viewport(0, 0, Form.ClientSize.Width, Form.ClientSize.Height, 0.0f, 1.0f));
+
+            context.OutputMerger.SetTargets(renderView);
             context.ClearRenderTargetView(renderView, Color.Black);
 
             foreach(var go in GameObjects)

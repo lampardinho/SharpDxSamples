@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Device = SharpDX.Direct3D11.Device;
 
-namespace Framework
+namespace Framework.Components
 {
-    public class Time
+    public class Behaviour : Component
     {
-        public static float DeltaTime;
-        public static float TimeSinceStartup;
     }
 }
