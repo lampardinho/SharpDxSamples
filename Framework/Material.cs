@@ -23,10 +23,10 @@ namespace Framework
 
         public Material(Device device)
         {
-            vertexShaderByteCode = ShaderBytecode.CompileFromFile(@".\MiniTri.fx", "VSMain", "vs_5_0");
+            vertexShaderByteCode = ShaderBytecode.CompileFromFile(@".\Sphere.fx", "VSMain", "vs_5_0", ShaderFlags.PackMatrixRowMajor);
             vertexShader = new VertexShader(device, vertexShaderByteCode);
 
-            pixelShaderByteCode = ShaderBytecode.CompileFromFile(@".\MiniTri.fx", "PSMain", "ps_5_0");
+            pixelShaderByteCode = ShaderBytecode.CompileFromFile(@".\Sphere.fx", "PSMain", "ps_5_0", ShaderFlags.PackMatrixRowMajor);
             pixelShader = new PixelShader(device, pixelShaderByteCode);
 
             layout = new InputLayout(

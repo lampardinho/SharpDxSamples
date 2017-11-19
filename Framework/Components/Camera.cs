@@ -12,14 +12,29 @@ namespace Framework.Components
     {
         public static Camera Main 
         {
-            get
-            {
-                return null;
-            }
+            get; private set;
         }
 
-        public Matrix Projection;
+        public Matrix Projection = Matrix.Identity;
+        public Matrix ViewMatrix = Matrix.Identity;
 
-        public Camera(Device device) : base(device) { }
+        public Matrix ViewProj = Matrix.Identity;
+
+        public Camera()
+        {
+            Main = this;            
+        }
+
+        public override void Update()
+        {
+            base.Update();
+
+            // Setup new projection matrix with correct aspect ratio
+            //ViewMatrix = Matrix.LookAtLH(new Vector3(0, 0, -95), new Vector3(0, 0, 0), Vector3.UnitY);
+            ViewMatrix = Matrix.Invert(gameObject.GetComponent<Transform>().ModelMatrix);
+            Projection = Matrix.PerspectiveFovLH((float)Math.PI / 4.0f, Application.Form.ClientSize.Width / (float)Application.Form.ClientSize.Height, 0.1f, 100.0f);
+
+            ViewProj = Matrix.Multiply(ViewMatrix, Projection);
+        }
     }
 }

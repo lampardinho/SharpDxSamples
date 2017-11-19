@@ -17,13 +17,20 @@ namespace Framework
         public GameObject()
         {
             components = new List<Component>();
+            AddComponent<Transform>();
+            transform = GetComponent<Transform>();
         }
 
-        public void AddComponent<T>() where T : Component
+        public void AddComponent<T>() where T : Component, new()
         {
-            T c = (T)Activator.CreateInstance(typeof(T), device);
+            T c = new T();
+            c.gameObject = this;
             components.Add(c);
-            c.device = device;
+        }
+
+        public T GetComponent<T>() where T: Component
+        {
+            return components.Find(c => c.GetType() == typeof(T)) as T;
         }
 
         public void Update()

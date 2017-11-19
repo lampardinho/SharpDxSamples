@@ -10,11 +10,11 @@ namespace Framework
 {
     public class Transform : Component
     {
-        public Vector3 Position;
-        public Quaternion Rotaion;
+        public Vector3 Position = Vector3.Zero;
+        public Quaternion Rotaion = Quaternion.Identity;
 
-        public Transform(Device device) : base(device) { }
+        public Transform() { }
 
-        public Matrix ModelMatrix;
+        public Matrix ModelMatrix = Matrix.Identity;
     }
 }

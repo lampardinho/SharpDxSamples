@@ -1,4 +1,5 @@
 ﻿using Framework;
+using Framework.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,10 @@ namespace SolarSystem
 
             GameObject go = app.Instantiate();
             go.AddComponent<BaseRenderer>();
+
+            GameObject cam = app.Instantiate();
+            cam.AddComponent<Camera>();
+            cam.AddComponent<CameraMoveBehaviour>();
 
             app.Run();
         }

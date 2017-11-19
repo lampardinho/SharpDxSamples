@@ -10,6 +10,7 @@ struct PS_IN
 	float4 col : COLOR;
 };
 
+//fix
 float4x4 worldViewProj;
 
 PS_IN VSMain(VS_IN input)

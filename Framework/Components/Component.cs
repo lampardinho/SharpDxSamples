@@ -9,6 +9,8 @@ namespace Framework
 {
     public class Component
     {
+        public GameObject gameObject;
+
         public Component()
         {
         }
